@@ -5,17 +5,20 @@ import time
 
 
 def setup_screen(stdscr):
+    """ set up the screen """
     stdscr.clear()
     stdscr.addstr("Welcome to the Speed typing test. Please any key to begin.", curses.color_pair(2))
     stdscr.refresh()
     stdscr.getkey()
 
 def load_text():
+    """" create a list of words from a text file """
     with open('text.txt', 'r') as r:
         lines = r.readlines()
         return random.choice(lines).strip()
 
 def display_text(stdscr,text_to_type,typed_text,wpm=0):
+    """ display the text to type and the typed text """
     stdscr.addstr(text_to_type)
     stdscr.addstr(1, 0, f"WPM: {wpm}")
     for i, char in enumerate(typed_text):
@@ -27,6 +30,7 @@ def display_text(stdscr,text_to_type,typed_text,wpm=0):
         stdscr.addstr(0, i, char, color)
 
 def wordsperminute(stdscr):
+    """ calculate the words per minute """
     text_to_type = load_text()
     typedtext = []
     wpm = 0
